@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const ScrollUp = ({ color = 'black' }) => {
+const ScrollUp = ({ color }) => {
   const [showScrollButton, setShowScrollButton] = useState(false);
 
   const scrollToTop = () => {

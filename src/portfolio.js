@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './styles.css';
 import ScrollUp from './components/ScrollUp';
-import Trackr from './overviews/trackr';
-import FleetManager from './overviews/fleetmanager';
+import Trackr from './overviews/trackr-ovw';
+import FleetManager from './overviews/fleetmanager-ovw';
 
 function Portfolio() {
 
@@ -27,17 +27,17 @@ function Portfolio() {
     //Text Highlight effect on scroll out
     useEffect(() => {
         const handleScroll = () => {
-          const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+          
+          const viewportHeight = window.innerHeight;
           const scrollTop = window.scrollY;
-          const scrollFraction = scrollTop / scrollHeight;
-                    let colorFraction2;
-          const halfwayPoint = scrollHeight / 2;
-          if (scrollTop > halfwayPoint) {
-            // Calculate fraction based on the distance scrolled past the halfway point
-            const scrollFraction2 = (scrollTop - halfwayPoint) / (scrollHeight - halfwayPoint);
-            colorFraction2 = Math.min(scrollFraction2 * 2, 1); // Accelerate the rate and clamp at 1
-          } else {
-            colorFraction2 = 0; // No color change before halfway
+          const animationEndPoint = viewportHeight / 2;
+          const scrollFraction = Math.min(scrollTop / animationEndPoint, 1);
+          const secondAnimationStartPoint = viewportHeight / 3;
+          // Animation for the second text completes at the next half viewport height (i.e., full viewport height from the top)
+          const secondAnimationEndPoint = viewportHeight/2;
+          let colorFraction2 = 0;
+          if (scrollTop > secondAnimationStartPoint) {
+            colorFraction2 = Math.min((scrollTop - secondAnimationStartPoint) / (secondAnimationEndPoint - secondAnimationStartPoint), 1);
           }
     
           const colorFraction = Math.min(scrollFraction * 3, 1); // Double the rate and clamp at 1
@@ -81,32 +81,79 @@ function Portfolio() {
 
     //Sticky Section
     const trackrRef = useRef(null);
-    const [isSticky, setIsSticky] = useState(false);
-    const [stickyEnd, setStickyEnd] = useState(0);
-
+    const cacheRef = useRef(null);
+    const trackrRef2 = useRef(null);
+    const cacheRef2 = useRef(null);
     useEffect(() => {
-        const handleScroll = () => {
-        if (trackrRef.current) {
-            const trackrRect = trackrRef.current.getBoundingClientRect();
-            if (!isSticky && trackrRect.top <= 0) {
-            setIsSticky(true);
-            setStickyEnd(window.scrollY + 1000); // Set the end point for sticky positioning
-            }
-
-            // Check if the sticky phase has ended
-            if (isSticky && window.scrollY >= stickyEnd) {
-            setIsSticky(false);
-            }
+      const handleScroll = () => {
+        const cacheRect = cacheRef.current.getBoundingClientRect();
+        const cache2Rect = cacheRef2.current.getBoundingClientRect();
+    
+        if (cacheRect.bottom <= window.innerHeight) {
+          // When bottom of cacheRef reaches bottom of viewport
+          trackrRef.current.classList.add('sticky-bottom');
+          trackrRef.current.classList.remove('sticky');
+        } else if (cacheRect.top <= 0) {
+          // When top of cacheRef reaches top of viewport
+          trackrRef.current.classList.add('sticky');
+          trackrRef.current.classList.remove('sticky-bottom');
+        } else {
+          // In all other cases
+          trackrRef.current.classList.remove('sticky', 'sticky-bottom');
         }
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
+  
+        if (cache2Rect.bottom <= window.innerHeight) {
+          // When bottom of cacheRef reaches bottom of viewport
+          trackrRef2.current.classList.add('sticky-bottom');
+          trackrRef2.current.classList.remove('sticky');
+        } else if (cache2Rect.top <= 0) {
+          // When top of cacheRef reaches top of viewport
+          trackrRef2.current.classList.add('sticky');
+          trackrRef2.current.classList.remove('sticky-bottom');
+        } else {
+          // In all other cases
+          trackrRef2.current.classList.remove('sticky', 'sticky-bottom');
+        }
+      };
+    
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initialize on component mount
+    
+      return () => {
         window.removeEventListener('scroll', handleScroll);
-        };
-    }, [isSticky, stickyEnd]);
+      };
+    }, []);
 
+    //Funnel animation
+    const funnelRef = useRef(null);
+    useEffect(() => {
+      const handleScroll = () => {
+          if (funnelRef.current) {
+              const funnelRect = funnelRef.current.getBoundingClientRect();
+              const triggerHeight = window.innerHeight / 16;
+    
+              // Condition to show the redDiv
+              if (funnelRect.top <= triggerHeight) {
+                  document.getElementById('redDiv').style.display = 'flex';
+              } else {
+                  document.getElementById('redDiv').style.display = 'none';
+              }
+    
+              // New condition to hide the redDiv before "Art" enters the second hole
+              const secondHolePosition = funnelRect.height / 2.8; // Assuming the second hole is at 1/4th of the funnel's height
+              if (funnelRect.top <= -secondHolePosition + window.innerHeight / 16) {
+                  document.getElementById('redDiv').style.display = 'none';
+              }
+          }
+      };
+    
+      window.addEventListener('scroll', handleScroll);
+      handleScroll(); // Initialize on component mount
+    
+      return () => {
+          window.removeEventListener('scroll', handleScroll);
+      };
+    }, []);
 
     return (
         <div className="body">
@@ -124,32 +171,77 @@ function Portfolio() {
                     <img ref={imageRef} src="./img/icons/react-light.png" alt="react" style={{ width: imageWidth, maxWidth:600, borderRadius: 150, position: 'absolute', left: '5%', top: '50%', transform: 'translate(-50%, -50%)' }} />
                 </div>
                 <div style={{height: '100vh', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column', paddingLeft: 40, paddingRight:40, maxWidth: 700, zIndex: 1, lineHeight: 2 }}>
-                    <h2 ref={(el) => (elementsRef.current[0] = el)} className="slide-in">
-                        Through the following projects I will demonstrate <br/> 
-                    </h2>
-                    <h2 ref={(el) => (elementsRef.current[1] = el)} className="slide-in" style={{fontWeight: 600}}>
+                    <h2 ref={(el) => (elementsRef.current[0] = el)} className="slide-in" style={{fontWeight: 600}}>
                         <span style={{color:'rgb(215, 215, 255)', paddingLeft:40}}>&#8226;</span> comprehensive coding skills
                     </h2>
-                    <h2 ref={(el) => (elementsRef.current[2] = el)} className="slide-in" style={{fontWeight: 600}}>
+                    <h2 ref={(el) => (elementsRef.current[1] = el)} className="slide-in" style={{fontWeight: 600}}>
                         <span style={{color:'rgb(215, 215, 255)', paddingLeft:40}}>&#8226;</span> a deep understanding of UX design principles 
                     </h2>
-                    <h2 ref={(el) => (elementsRef.current[3] = el)} className="slide-in" style={{fontWeight: 600}}>
+                    <h2 ref={(el) => (elementsRef.current[2] = el)} className="slide-in" style={{fontWeight: 600}}>
                         <span style={{color:'rgb(215, 215, 255)', paddingLeft:40}}>&#8226;</span> a relentless creativity for UI and design<br/> 
                     </h2>
-                    <h2 ref={(el) => (elementsRef.current[4] = el)} className="slide-in" style={{width:'100%',alignItems: 'flex-end', textAlign:'right'}}>
-                        in a A-Z product development context.
-                    </h2>
-                    <h2 ref={(el) => (elementsRef.current[5] = el)} className="slide-in">
-                        I will also illustrate how engineering and business acumen valuably contribute to these projects.
-                    </h2>
+                    <div style={{width: '100%',display:'flex', flexDirection: 'row', justifyContent:'center',alignItems:'center', marginTop:100}}>
+                      <img ref={(el) => (elementsRef.current[3] = el)} src="./img/icons/js.png" alt="react" style={{ width: '30%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
+                      <img ref={(el) => (elementsRef.current[4] = el)} src="./img/icons/html.png" alt="react" style={{ width: '30%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
+                      <img ref={(el) => (elementsRef.current[5] = el)} src="./img/icons/css.png" alt="react" style={{ width: '30%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
+                    </div>
+                    <div style={{width: '100%',display:'flex', flexDirection: 'row', justifyContent:'center',alignItems:'center',marginTop:40}}>
+                      <img ref={(el) => (elementsRef.current[6] = el)} src="./img/icons/figma.png" alt="react" style={{ width: '30%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
+                      <img ref={(el) => (elementsRef.current[7] = el)} src="./img/icons/protopie.png" alt="react" style={{ width: '30%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
+                      <img ref={(el) => (elementsRef.current[8] = el)} src="./img/icons/aws.png" alt="react" style={{ width: '30%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
+                    </div>
                 </div>
             </div>
-            <div ref={trackrRef} style={{maxWidth: '100vw',position: isSticky ? 'sticky' : 'static', top: 0}}>
+            <div ref={cacheRef}  className="cache-container" style={{height: '250vh'}}>
+              <div ref={trackrRef} style={{}}>
                 <Trackr />
+              </div>
             </div>
-            <div style={{height: '600vh'}}>
+            <div style={{height:'100vh', justifyContent:'center', alignItems:'center', display: 'flex', width:'100%'}}>
+              <div id="redDiv" style={{height:'100vh', position:'fixed', width: '100%',  display:'flex',
+              flexDirection: 'column', bottom: 0, justifyContent:'center', alignItems:'center', zIndex: -1}}>
+                <h1 style={{fontWeight: 700}}>All together</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>Art</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>Software engineering</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>UX design</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>Mechanical engineering</h1> <br/><br/><br/><br/>
+                <h1 style={{fontWeight: 700,background: `linear-gradient(45deg, red, blue)`,WebkitBackgroundClip: 'text',
+                backgroundClip: 'text',color: 'transparent'}}>Atomic</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>Beautiful</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>Optimized</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>User-centric</h1><br/><br/>
+                <h1 style={{fontWeight: 700}}>Functional</h1> <br/><br/><br/><br/>
+              </div>
+              <div ref={funnelRef} id="funnel" style={{height:'100vh', position:'absolute', width: '100%',  display:'flex', 
+              flexDirection: 'column'}}>
+                <div style={{backgroundColor:'white', width:'100vw',height: `calc(40vh - 2.5em)`, display:'flex'}}></div>
+                <div style={{width:'100vw', display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <div style={{backgroundColor:'white', width:'30vw',height: '5em', display:'flex'}}></div>
+                  <div style={{background:`linear-gradient(to bottom, white, transparent, white)`, width:'100%',height: '5em', display:'flex'}}></div>
+                  <div style={{backgroundColor:'white', width:'30vw',height: '5em', display:'flex'}}></div>
+                </div>
+                <div style={{backgroundColor:'white', width:'100vw',height: `calc(34.5vh - 2.5em)`, display:'flex',
+                justifyContent:'flex-start', alignItems: 'center', flexDirection:'column'}}>
+                  <img src="./img/pics/funnel.png" alt="react" style={{ width: '10%', objectFit:'contain', height: 'auto', 
+                  marginTop: 50, marginBottom: 50}} />
+                </div>
+                <div style={{width:'100vw', display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                  <div style={{backgroundColor:'white', width:'30vw',height: '5em', display:'flex'}}></div>
+                  <div style={{background:`linear-gradient(to bottom, white, transparent, white)`, width:'100%',height: '5em', display:'flex'}}></div>
+                  <div style={{backgroundColor:'white', width:'30vw',height: '5em', display:'flex'}}></div>
+                </div>
+                <div style={{backgroundColor:'white', width:'100vw',height: `calc(25.5vh - 5em)`, display:'flex',
+                justifyContent:'flex-start', alignItems: 'center', flexDirection:'column'}}>
+                  <h1>Product Design</h1>
+                </div>
+              </div>
+            </div>
+            <div ref={cacheRef2}  className="cache-container" style={{height: '250vh'}}>
+              <div ref={trackrRef2} style={{}}>
+                <FleetManager />
+              </div>
+            </div>
 
-            </div>
             
             <ScrollUp color="white" />
         </div>

@@ -6,45 +6,42 @@ import TitleElement from '../components/TitleElement';
 
 function Trackr() {
 
-
     const tags = ["fullstack", "algorithm", "data analysis", "lifestyle", "deployed"];
-    const icons = ["react","js","aws","sqlite"];
+    const icons = ["react","js","aws","sqlite","figma","protopie","python"];
 
-    //3D animation
     const cubeRef = useRef(null);
     const backgroundimg = useRef(null);
+    const sectionRef = useRef(null);
+    const product = useRef(null); 
+    const sectionButton = useRef(null); 
+
+    //3D animation
+    const [sectionOpacity, setSectionOpacity] = useState(0); 
+
     useEffect(() => {
         let animationStart = 0;
         let isAnimationStarted = false;
+        let sectionFadeStart = 0; 
 
         const handleScroll = () => {
-        const scrollY = window.scrollY;
-        const maxScrollY = 500;
+            const scrollY = window.scrollY;
+            const maxScrollY = 500;
 
-        if (!isAnimationStarted && cubeRef.current) {
-            const containerRect = cubeRef.current.getBoundingClientRect();
-            let startOffset = 100; // Start the animation 100px before the div reaches the top
+            if (!isAnimationStarted && backgroundimg.current) {
+                const containerRect = backgroundimg.current.getBoundingClientRect();
+                let startOffset = 0;
 
-            if (containerRect.top <= startOffset) {
-            animationStart = scrollY;
-            isAnimationStarted = true;
+                if (containerRect.top <= startOffset) {
+                    animationStart = scrollY;
+                    isAnimationStarted = true;
+                    sectionFadeStart = animationStart + 100; 
+                }
             }
-        }
 
-        if (!isAnimationStarted && backgroundimg.current) {
-            const containerRect = backgroundimg.current.getBoundingClientRect();
-            let startOffset = 0; // Start the animation 100px before the div reaches the top
-
-            if (containerRect.top <= startOffset) {
-            animationStart = scrollY;
-            isAnimationStarted = true;
+            let scrollProgress = 0;
+            if (isAnimationStarted && scrollY >= animationStart) {
+                scrollProgress = Math.min((scrollY - animationStart) / maxScrollY, 1);
             }
-        }
-
-        let scrollProgress = 0;
-        if (isAnimationStarted && scrollY >= animationStart) {
-            scrollProgress = Math.min((scrollY - animationStart) / maxScrollY, 1);
-        }
 
             const rotateY = -30 * scrollProgress; 
             const rotateZ = 5 * scrollProgress;  
@@ -53,23 +50,32 @@ function Trackr() {
             const translateX = 60 * scrollProgress; 
             const translateY = 5 * scrollProgress;  
 
-            cubeRef.current.style.transform = `rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale}) translateX(${translateX}vw) translateY(${translateY}vh)`;
-            backgroundimg.current.style.backgroundSize = `${100}% ${scale2 * 100}%`;
-        }
-        
+            if (cubeRef.current) {
+                cubeRef.current.style.transform = `rotateY(${rotateY}deg) rotateZ(${rotateZ}deg) scale(${scale}) translateX(${translateX}vw) translateY(${translateY}vh)`;
+            }
+            if (backgroundimg.current) {
+                backgroundimg.current.style.backgroundSize = `${100}% ${scale2 * 100}%`;
+            }
+
+            
+            if (scrollY > sectionFadeStart) {
+                const newOpacity = Math.min((scrollY - sectionFadeStart) / (maxScrollY - 100), 1);
+                sectionRef.current.style.transform = `scale(${scrollProgress})`;
+                setSectionOpacity(newOpacity); 
+            } else {
+                setSectionOpacity(0);
+            }
+        };
 
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
-
     }, []);
-
-    const sectionRef = useRef(null);
-    const product = useRef(null); 
-    const sectionButton = useRef(null); 
 
     window.addEventListener('beforeunload', function () {
         document.querySelector('.page-transition').classList.add('trackr-section-exit');
     });
+
+
 
 
     return(
@@ -89,7 +95,7 @@ function Trackr() {
             </div>
             <div style={{overflowX:'hidden', height: '100vh',width: '100vw',
             display: 'flex',justifyContent:'center', alignItems:'flex-start', flex:3, overflow:'hidden'}}>
-                <div ref={sectionRef} class="section-container" >
+                <div ref={sectionRef} class="section-container"  style={{opacity: sectionOpacity}}>
                     <TitleElement text="Trackr" img="trackr-icon"/>
                     <div class="overview-content">
                         <div></div>
@@ -115,7 +121,7 @@ function Trackr() {
                 </div>
             </div>
             <div ref={sectionButton} style={{flex:1, bottom: '10vh', display: 'flex', justifyContent:'center', alignItems:'center', width: '100%'}}>
-                <Button text="View Project" color="#0C6863" textcolor='white' path={"/portfolio/trackr"} />
+                <Button text="View Project" color="#0C6863" textcolor='white' path={"/trackr"} />
             </div>
         </div>
     )

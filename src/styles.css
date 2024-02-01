@@ -35,7 +35,7 @@ p {
 }
 
 h1 {
-    font-size: 30px;
+    font-size: 28px;
     font-family: 'Inter';
     font-weight: 400;
 }
@@ -51,6 +51,15 @@ h3 {
     font-weight: 400;
     font-size: 2em;
     margin-bottom: 20px;
+}
+
+.quote {
+    font-size: 20px;
+    font-family: 'Times New Roman';
+    font-weight: 400;
+    margin: 40px;
+    font-style: italic;
+    color:rgba(0, 0, 0, 0.5);
 }
 
 ul {
@@ -78,14 +87,42 @@ ul li::before {
     font-size: 20px; 
 }
 
+.fleet-content {
+    display: flex;
+    flex-direction: column;
+    background-color: #323232;
+    width: 100%; 
+    z-index: 2; 
+    max-width: 1000px; 
+    padding: 40px;
+}
+
+.fleet-content p{
+    color: rgb(211, 211, 211);
+}
+
+.fleet-content li{
+    color: rgb(211, 211, 211);
+}
+
 .sectionTitle {
     font-family: 'Inter';
     font-weight: 600;
     font-size: 2.8em;
     margin-bottom: 25px;
     margin-top: 50px;
-    color: #d5e6e3;
-    text-shadow: 0px 0px 2px #0C6863, 2px 2px 2px rgb(0,0,0,0.5);
+    color: #3e4342;
+    text-shadow: 0px 0px 2px #0C6863;
+}
+
+.fleetSectionTitle {
+    font-family: 'Inter';
+    font-weight: 500;
+    font-size: 2.5em;
+    margin-bottom: 25px;
+    margin-top: 50px;
+    color: #FFD645;
+    text-shadow: 2px 2px 2px 'black';
 }
 
 .cat {
@@ -152,6 +189,9 @@ ul li::before {
         padding-left: 40px;
         padding-right: 20px;
     }
+    .introcontainer h1{
+        font-size: 2.8em;
+    }
 }
 
 @media screen and (max-width: 999px) {
@@ -162,6 +202,9 @@ ul li::before {
         flex-direction: column;
         justify-content: center;
     }
+    .introcontainer h1{
+        font-size: 2em;
+    }
 }
 
 .content {
@@ -169,6 +212,19 @@ ul li::before {
     width: '100%'; 
     margin-top: -20px;
     box-shadow: 0px -8px 30px rgb(0,0,0,0.2);
+}
+
+.flicking .cardprojects {
+    width: 60vw;
+    height: 70vh;
+    background-color: transparent;
+    border-radius: 5vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+    flex-direction: column;
+    text-align: center;
 }
 
 .flicking .card {
@@ -182,6 +238,10 @@ ul li::before {
     justify-content: center;
     align-items: center;
     padding: 5%;
+}
+
+.flicking .card p{
+    color: #323232;
 }
 
 .flicking .phonecard {
@@ -257,14 +317,14 @@ ul li::before {
 .sticky {
     position: fixed;
     top: 0;
-    width: 100%; /* Adjust the width as needed */
-    z-index: 100; /* Ensure it's above other content */
+    width: 100%; 
+    z-index: 100; 
   }
 
   .sticky-bottom {
     position: absolute;
-    bottom: 0; /* Align to the bottom of cacheRef */
-    width: 100%; /* Adjust the width as needed */
+    bottom: 0; 
+    width: 100%; 
   }
 
   .cache-container {
@@ -379,6 +439,9 @@ html {
     .overview-content {
         width: 100%;
     }
+    .row-to-column {
+        flex-direction: row;
+    }
 }
 @media screen and (max-width: 999px) {
     .section-container{
@@ -389,6 +452,9 @@ html {
     }
     .overview-content {
         width: 60%;
+    }
+    .row-to-column {
+        flex-direction: column;
     }
 }
 
@@ -401,12 +467,26 @@ html {
     align-items: flex-start;
     flex-direction: column;
     padding: 30px;
+    overflow: hidden;
+    transform:  scale(0.5);
 }
 
 
 .section-container h1{
     font-size: 4rem;
     font-weight: 600;
+}
+
+.fleet-section-container{
+    width: 100%;
+    max-width: 600px;
+    height: 100vh;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 30px;
+    overflow: hidden;
 }
 
 .overview-content {
@@ -416,3 +496,112 @@ html {
     justify-content: space-between; 
 }
 
+.row-to-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+.full-screen-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(45, 45, 45, 0.95); 
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; 
+}
+
+.full-screen-menu ul {
+    list-style: none;
+    text-align: center;
+    font-family: 'Inter';
+}
+
+
+.full-screen-menu ul, .full-screen-menu li::before {
+    content: ''; 
+    font-size: 20px; 
+}
+
+.contact-back { 
+    width:100vw;
+    height: 100vh; 
+    justify-content:center; 
+    align-items:center; 
+    display:flex;
+    background-image: url('../public/img/pics/seoul.png');
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+}
+
+.contact-section {
+    padding: 20px;
+    background-color: rgb(0, 0, 0, 0.5);
+    text-align: center;
+    width: 80%;
+    max-width: 1000px;
+  }
+
+  .contact-section p {
+    color: white;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 20px;
+  }
+
+    .contact-section p {
+    color: white;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 20px;
+  }
+
+  .contact-section h2 {
+    color: white;
+    font-size: 2em;
+    font-weight: 400;
+    margin: 20px;
+  }
+  
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .contact-info p {
+    color: white;
+    font-size: 1.5em;
+    font-weight: 300;
+    margin: 20px;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 80%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .contact-form button {
+    padding: 10px 20px;
+    background-color: transparent; 
+    color: white;
+    border: none;
+    border-radius: 20px;
+    border-width: 3;
+    border-color: white;
+    border-style: solid;
+    cursor: pointer;
+    margin-top: 10px;
+  }

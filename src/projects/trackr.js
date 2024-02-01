@@ -8,6 +8,7 @@ import Flicking from "@egjs/react-flicking";
 import "@egjs/react-flicking/dist/flicking.css";
 import Persona from '../components/Persona';
 import GoBack from '../components/GoBack';
+import MenuBar from '../components/MenuBar';
 
 function Trackr() {
 
@@ -18,9 +19,6 @@ function Trackr() {
         display: 'flex', alignItems: 'center',justifyContent:'flex-start'}}>
             <div style={{width: '100%', zIndex: 2, maxWidth: 1000}}>
                 <div style={{backgroundColor: 'white', weight:'100%', height: '20vh'}}>
-                    <div style={{display:'flex', width:'100%', maxWidth: 1000, position: 'absolute', justifyContent:'center', marginTop: 20}}>
-                        <img src="./img/pics/chevrons-left.png" alt="trackr" style={{width: 60, marginBottom: 50, borderRadius: '6vw'}}/>
-                    </div>
                     <TitleElement text="Trackr" img="trackr-icon"/>
                 </div>
                 <div class="content" style={{backgroundColor: '#F0F7F6'}}>
@@ -32,7 +30,7 @@ function Trackr() {
                     <h2 class="sectionTitle">STEPS</h2>
                     <div style={{display: 'flex',flexDirection:'row', flexWrap: 'wrap', width:'100%'}}>
                         {tags.map((text, index) => (
-                            <SectionButton key={index} text={text} color={'#D4ECE9'} />
+                            <SectionButton key={index} text={text} color={'#D4ECE9'} textcolor={'#0C6863'} />
                         ))}
                     </div>
                     <h2 class="sectionTitle">PROJECT ORIGIN</h2>
@@ -76,10 +74,34 @@ function Trackr() {
                     <h2 class="sectionTitle">USER RESEARCH</h2>
                     <h3 style={{color: '#0C6863'}}>Qualitative analysis</h3>
                     <p>
-                    Check reviews in competitor’s review section.
-                    “I see no way to run experiments. It would be great to be able to automatically 
+                    Check reviews in competitor’s review section. </p><br/><br/>
+                    <div style={{display: 'flex', flexDirection: 'row',flexWrap:'wrap', justifyContent:'center'}}>
+                        <div style={{margin:10,display: 'flex', flexDirection: 'row', justifyContent:'center', marginBottom: 10}}>
+                            <p style={{color: 'white', backgroundColor: '#0C6863', padding: 20, borderRadius: 10, maxWidth:220}}>
+                            “I see no way to run experiments. It would be great to be able to automatically 
                     integrate data from Apple Health, showing things like HRV and sleep quality that 
-                    would have an obvious bearing on mood and energy.”
+                    would have an obvious bearing on mood and energy.”</p>
+                        </div>
+                        <div style={{margin:10,display: 'flex', flexDirection: 'row', justifyContent:'center', marginBottom: 10}}>
+                            <p style={{color: 'white', backgroundColor: '#0C6863', padding: 20, borderRadius: 10, maxWidth:220}}>
+                                "Amazing app, but bad design choice, not lifting me up with cuteness and colors not passing for me, it is not pleasure to log unfortunatelly, its annoying. If the app had better design and more harmonic color palete it would be awesome"
+                            </p>
+                        </div>
+                        <div style={{margin:10,display: 'flex', flexDirection: 'row', justifyContent:'center'}}>
+                            <p style={{color: 'white', backgroundColor: '#0C6863', padding: 20, borderRadius: 10, maxWidth:220}}>
+                                “This is an annoying, interruptive, absolutely driving me crazy - pop up covers the screen, stops processes in the middle, even interrupts the keyboard while I am typing. Great idea, BAD implementation.”</p>
+                        </div>
+                        <div style={{margin:10,display: 'flex', flexDirection: 'row', justifyContent:'center'}}>
+                            <p style={{color: 'white', backgroundColor: '#0C6863', padding: 20, borderRadius: 10, maxWidth:220}}>
+                                “I think it's really good at what it should, but my concern was about all my data that didn't save automatically. As I now just found out that you have to save it yourself which sucks.... cause I had a lot of personal feelings in this app.”</p>
+                        </div>
+                        <div style={{margin:10,display: 'flex', flexDirection: 'row', justifyContent:'center'}}>
+                            <p style={{color: 'white', backgroundColor: '#0C6863', padding: 20, borderRadius: 10, maxWidth:220}}>
+                                “The app focuses way too much on moods. For example , I just can barely see a full statistics of all the activities I do but I can see every detail for every mood. I dislike the prioritization of mood tracking when that's a statistic I don't even need an app for.”</p>
+                        </div>
+                    </div><br/><br/>
+                    <p>
+                    
                     </p>
                     <h3 style={{color: '#0C6863'}}>Quantitative analysis</h3>
                     <p>
@@ -100,7 +122,7 @@ function Trackr() {
                                     name="Sasha" 
                                     location="Bangkok" 
                                     age="24" occupation="Graduate Student" 
-                                    bio="Emily struggles with procrastination and is always looking for external motivation to help her stay on track with her studies and personal projects." 
+                                    bio="Sasha struggles with procrastination and is always looking for external motivation to help her stay on track with her studies and personal projects." 
                                     painpoints="Needs reminders and incentives to motivate her to start and complete tasks." 
                                     color="#0C6863"/>
                             </div>
@@ -205,28 +227,33 @@ function Trackr() {
                     <h2 class="sectionTitle">WIREFRAMES</h2>
                     <img src="./img/pics/trackr-wireframes.png" alt="wireframes" style={{width: '100%', marginBottom: 50}}/>
                     <h2 class="sectionTitle">PROTOTYPING</h2>
+                    <div class="row-to-column">
                     <div style={{display: 'flex', width: '100%', justifyContent:'center', alignItems: 'center'}}>
                         <img src="./img/pics/trackr-prototype.gif" alt="prototype" style={{width: '50%', marginBottom: 50, borderRadius: '6vw'}}/>
                     </div>
+                    <video width="400" height="240" controls>
+                        <source src={'./img/pics/tracker.mp4'} type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                    </div>
+                    
                     <h2 class="sectionTitle">FINAL DESIGN</h2>
-                    <h3 style={{color: '#0C6863'}}>Competitive edge</h3>
-                    <ul>
-                        <li>
-                        Multiple ways of recording a track - versatile (boolean, number, state)
-                        </li>
-                        <li>
-                        Powerful insight provider
-                        </li>
-                        <li>
-                        My daily record doesn’t require to create a new record, it is already the main page
-                        </li>
-                        <li>
-                        Hyper-customizability so they can associate their indicator better and express uniqueness
-                        </li>
-                        <li>
-                        Integrated onboarding without tutorial
-                        </li>
-                    </ul>
+                    <div class="row-to-column">
+                        <img src="./img/pics/trackr-icon.png" alt="trackr-final" style={{width: 100, marginBottom: 20, borderRadius: 20}}/>
+                        <ul>
+                            <li>
+                            The app requires a lot of different colors for data differenciation and requires to visualize a lot of data 
+                            all at once, so it is necessary to keep a very simple and clean design, at least for the onboarding period.
+                            </li>
+                            <li>
+                                To keep a sense of familiarity and comfort, I chose to reproduce iOS design codes that comply with required refined look. 
+                            </li>
+                            <li>
+                                The logo of the app follows the a similar design to the one of Listr, its sister app. The "T" standing for Trackr is represented 
+                                in the form of a progress bar to remind features of the app.
+                            </li>
+                        </ul>
+                    </div>
                     <div class="card-wrapper">
                         <Flicking
                         circular={true}
@@ -248,8 +275,27 @@ function Trackr() {
                         </Flicking>
                     </div>
                     <img src="./img/pics/trackr-colors.png" alt="trackr-final" style={{width: '100%', marginBottom: 50, borderRadius: '6vw'}}/>
+                    <h3 style={{color: '#0C6863'}}>Competitive edge</h3>
+                    <ul>
+                        <li>
+                        Multiple ways of recording a track - versatile (boolean, number, state)
+                        </li>
+                        <li>
+                        Powerful insight provider
+                        </li>
+                        <li>
+                        My daily record doesn’t require to create a new record, it is already the main page
+                        </li>
+                        <li>
+                        Hyper-customizability so they can associate their indicator better and express uniqueness
+                        </li>
+                        <li>
+                        Integrated onboarding without tutorial
+                        </li>
+                    </ul>
                 </div>
             </div>
+            <MenuBar />
             <ScrollUp color="white" />
             <GoBack color="white" />
         </div>

@@ -31,9 +31,11 @@ function Fleet() {
                 <p> In this UX case study, I will explore and propose a user interface for a yet-to-be-released software 
                     product by a company specializing in autonomous driving solutions, specifically tailored for last-mile 
                     logistics in car manufacturing settings. The envisioned software serves as a fleet manager, functioning 
-                    as a control tower to oversee the autonomous navigation of vehicles from the end of the assembly line. 
+                    as a control tower to oversee the autonomous navigation of vehicles within the factory. 
                     My focus will be on designing a UX/UI that, upon the product's release, could potentially enhance user 
                     interaction and streamline the autonomous fleet management system, following industry standards.</p>
+                    <p style={{fontSize: 10, fontStyle: 'italic'}}> Note: This is a theoretical use-case, chosen so that it illustrates current
+                    actual challenges in the industry. All the work described in this use-case has not been delivered in a professional setting.</p>
                 <div style={{display: 'flex', marginTop: 70, flexDirection: 'column', borderLeftColor: 'white', borderLeftWidth:2, 
                 borderLeftStyle: 'solid', paddingLeft: 20, marginBottom: 20}}>
                     <h2 class="fleetSectionTitle" style={{margin:0}}>Steps</h2>
@@ -65,7 +67,6 @@ function Fleet() {
                         Refresh the current standard software design staying in line with the company's branding and image.
                     </li>
                 </ul>
-                <img src="./img/pics/fleet-old1.png" alt="goals" style={{flex:1, width: '50%',margin: 20, objectFit: 'contain', height: 'auto'}}/>                
                 </div>
                 <div style={{display: 'flex', marginTop: 70, flexDirection: 'column', borderLeftColor: 'white', borderLeftWidth:2, 
                 borderLeftStyle: 'solid', paddingLeft: 20, marginBottom: 20}}>
@@ -130,7 +131,7 @@ function Fleet() {
                         <div className="card">
                             <Persona 
                                 type="The Factory Operator"
-                                img="./img/pics/persona1.png" 
+                                img="./img/personas/john.png" 
                                 name="John Smith" 
                                 location="Detroit, Michigan" 
                                 age="35" occupation="Factory Worker" 
@@ -142,7 +143,7 @@ function Fleet() {
                         <div className="card">
                             <Persona 
                                 type="The Logistics Specialist"
-                                img="./img/pics/persona2.png" 
+                                img="./img/personas/karl.png" 
                                 name="Karl Johnson" 
                                 location="Stuttgart, Germany" 
                                 age="28" occupation="Logistic Coordinator" 
@@ -153,7 +154,7 @@ function Fleet() {
                         <div className="card">
                             <Persona 
                                 type="The Safety-Minded Manager"
-                                img="./img/pics/persona3.png" 
+                                img="./img/personas/watanabe.png" 
                                 name="Hirotaka Watanabe" 
                                 location="Yokohama, Japan" 
                                 age="35" occupation="Operations Manager" 

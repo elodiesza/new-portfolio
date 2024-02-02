@@ -160,9 +160,11 @@ function Portfolio() {
         console.error('Error:', error);
       }
     };
-    if (emailSent) {
-      setIsSent("Thank you for your message, I will get back to you shortly.");
-    }
+    useEffect(() => {
+      if (emailSent) {
+        setIsSent("Thank you for your message, I will get back to you shortly.");
+      }
+    },[emailSent]);
 
     return (
         <div className="body">
@@ -180,16 +182,19 @@ function Portfolio() {
                     <img ref={imageRef} src="./img/icons/react-light.png" alt="react" style={{ width: imageWidth, maxWidth:600, borderRadius: 150, position: 'absolute', left: '5%', top: '50%', transform: 'translate(-50%, -50%)' }} />
                 </div>
                 <div style={{height: '100vh', display: 'flex', alignItems: 'flex-start', justifyContent: 'center', flexDirection: 'column', paddingLeft: 40, paddingRight:40, maxWidth: 700, zIndex: 1, lineHeight: 2 }}>
-                    <h2 ref={(el) => (elementsRef.current[0] = el)} className="slide-in" style={{fontWeight: 400}}>
-                        <span style={{color:'rgb(215, 215, 255)', paddingLeft:40}}>&#8226;</span> comprehensive coding skills
-                    </h2>
-                    <h2 ref={(el) => (elementsRef.current[1] = el)} className="slide-in" style={{fontWeight: 400}}>
-                        <span style={{color:'rgb(215, 215, 255)', paddingLeft:40}}>&#8226;</span> a deep understanding of UX design principles 
-                    </h2>
-                    <h2 ref={(el) => (elementsRef.current[2] = el)} className="slide-in" style={{fontWeight: 400}}>
-                        <span style={{color:'rgb(215, 215, 255)', paddingLeft:40}}>&#8226;</span> a relentless creativity for UI and design<br/> 
-                    </h2>
+                    <ul style={{fontSize: 15}}>
+                      <li ref={(el) => (elementsRef.current[0] = el)} className="slide-in">
+                        Comprehensive Front-end coding skills
+                      </li>
+                      <li ref={(el) => (elementsRef.current[1] = el)} className="slide-in">
+                      Deep understanding of UX design principles 
+                      </li>
+                      <li ref={(el) => (elementsRef.current[2] = el)} className="slide-in">
+                      Relentless creativity for UI and design
+                      </li>
+                    </ul>
                     <div style={{width: '100%',display:'flex', flexDirection: 'row', justifyContent:'center',alignItems:'center', marginTop:100}}>
+                      <img ref={(el) => (elementsRef.current[3] = el)} src="./img/icons/react.png" alt="react" style={{ margin:10, width: '10%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
                       <img ref={(el) => (elementsRef.current[3] = el)} src="./img/icons/js.png" alt="react" style={{ margin:10, width: '10%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
                       <img ref={(el) => (elementsRef.current[4] = el)} src="./img/icons/html.png" alt="react" style={{ margin:10, width: '10%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>
                       <img ref={(el) => (elementsRef.current[5] = el)} src="./img/icons/css.png" alt="react" style={{ margin:10, width: '10%', maxWidth: 100, objectFit:'contain', height: 'auto'}}/>

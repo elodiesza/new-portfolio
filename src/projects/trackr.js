@@ -118,7 +118,7 @@ function Trackr() {
                             <div className="card">
                                 <Persona 
                                     type="Procrastination navigator"
-                                    img="./img/pics/mita.png" 
+                                    img="./img/personas/mita.png" 
                                     name="Sasha" 
                                     location="Bangkok" 
                                     age="24" occupation="Graduate Student" 
@@ -129,7 +129,7 @@ function Trackr() {
                             <div className="card">
                                 <Persona 
                                     type="The Minimalist Achiever"
-                                    img="./img/pics/mita.png" 
+                                    img="./img/personas/alex.png" 
                                     name="Alex" 
                                     location="Austin, TX" 
                                     age="29" occupation="Freelance Graphic Designer" 
@@ -140,7 +140,7 @@ function Trackr() {
                             <div className="card">
                                 <Persona 
                                     type="The Efficiency Expert"
-                                    img="./img/pics/brandi.png" 
+                                    img="./img/personas/brandi.png" 
                                     name="Sarah" 
                                     location="London" 
                                     age="35" occupation="Operations Manager" 
@@ -151,7 +151,7 @@ function Trackr() {
                             <div className="card">
                                 <Persona 
                                     type="The Wellness Pioneer"
-                                    img="./img/pics/mita.png" 
+                                    img="./img/personas/david.png" 
                                     name="David" 
                                     location="Boulder, CO" 
                                     age="40" occupation="Yoga Instructor and Nutritionist" 
@@ -162,7 +162,7 @@ function Trackr() {
                             <div className="card">
                                 <Persona 
                                     type="The Slow Adaptor"
-                                    img="./img/pics/mita.png" 
+                                    img="./img/personas/margaret.png" 
                                     name="Margaret " 
                                     location="Phoenix, AZ" 
                                     age="65" occupation="Retired Teacher" 
@@ -173,7 +173,7 @@ function Trackr() {
                             <div className="card">
                                 <Persona 
                                     type="The Journaling Craze"
-                                    img="./img/pics/asma.png" 
+                                    img="./img/personas/asma.png" 
                                     name=" Olivia" 
                                     location="Seoul" 
                                     age="31" occupation="Journalist" 
@@ -185,7 +185,7 @@ function Trackr() {
                     </div>
                     <h2 class="sectionTitle">USER FLOW</h2>
                     <h3>High-level flow</h3>
-                    <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center',}}>
+                    <div class="row-to-column">
                         <div>
                             <ul>
                                 <li>
@@ -202,11 +202,11 @@ function Trackr() {
                                 </li>
                             </ul>
                         </div>
-                        <img src="./img/pics/trackr-userflow.png" alt="userflow" style={{width: '30%', marginBottom: 50}}/>
+                        <img src="./img/pics/trackr-userflow0.png" alt="userflow" style={{width: '50%', marginBottom: 50}}/>
                     </div>
                     <h3>Detailed flow</h3>
-                    <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-between', alignItems:'center'}}>
-                        <img src="./img/pics/trackr-userflow.png" alt="userflow" style={{width: '30%', marginBottom: 50}}/>
+                    <div class="row-to-column">
+                        <img src="./img/pics/trackr-userflow.png" alt="userflow" style={{width: '50%', marginBottom: 50}}/>
                         <div>
                             <ul>
                                 <li>

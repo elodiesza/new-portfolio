@@ -13,10 +13,10 @@ function MenuBar() {
     return (
         <div style={{width:'100vw', justifyContent:'center', alignItems:'center', display:'flex', zIndex:1000}}>
              <div style={{justifyContent: 'space-between', height: 50, position: 'fixed', marginLeft:20,top: 0, width:'100%', 
-             maxWidth:1000, flexDirection:'row', display:'flex', zIndex: 1000}} onClick={toggleMenu}>
+             maxWidth:1000, flexDirection:'row', display:'flex', zIndex: 1000}}>
                 <h1 style={{fontSize: 50,fontWeight: 500, zIndex: 1000, color: isOpen? 'white': 'black'}} onClick={toggleMenu}>≡</h1>
                 {isOpen && (
-                    <div class="full-screen-menu">
+                    <div class="full-screen-menu" onClick={toggleMenu}>
                         <ul>
                             <li><Link to={"/"} style={{color:'white', fontWeight: 600}} onClick={toggleMenu}>Home</Link></li>
                             <li><HashLink smooth to='/#trackr'  onClick={toggleMenu} style={{color:'white', fontWeight: 600}}>Projects</HashLink></li>
